@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Week 1</title>
+</head>
+<style>
+  body{
+    width: 30%;
+  }
+  #message {
+    color: aliceblue;
+  }
+  #number{
+    margin-top: 10px;
+  }
+</style>
+<body>
+  <b>Week 1</b><br />
+  <p>Guess number</p>
+  <div id="message"></div>
+  <input type="number" id="number" />
+  <button id="guessBtn">Guess</button>
+  <p>History</p>
+  <div id="result"></div>
+</body>
+<script> 
+  let button = document.getElementById("guessBtn")
+  let randomNumber = Math.floor(Math.random() * 10)
+  let result = ""
+  console.log(randomNumber);
+  let count = 0
+    button.addEventListener("click", function () {
+      var number = document.getElementById("number").value
+      document.getElementById("result").innerHTML  += number + "<br/>"
+      if (number == randomNumber) {
+        document.getElementById("message").innerHTML = "success"
+        document.getElementById("message").style.backgroundColor = "green"
+        setTimeout(() => {window.location.reload()}, 1000)
+       
+      } else {
+        document.getElementById("message").style.backgroundColor = "red"
+        count ++
+        if (count <= 10) {
+          let left = 10 - count        
+          document.getElementById("message").innerHTML = "fail, you have " + left + " guesses left"
+          if (left == 0) {
+            alert("You had reached 10 times to guess, the game will restart right now!")
+            setTimeout(() => {window.location.reload()}, 1000)
+          }
+        }
+      }
+    })
+</script>
+
+</html>

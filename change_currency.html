@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Week1</title>
+</head>
+
+<body>
+    <h1>Currency Converter</h1>
+    <div>
+        <input type="radio" id="usd" name="currency" value="usd" checked>
+        <label for="usd">USD</label></br>
+        <input type="radio" id="eur" name="currency" value="eur">
+        <label for="eur">EURO</label>
+    </div>
+    <input onkeypress="getResult()" type="number" id="number" />
+    <button onclick="getResult()">Convert Currency</button>
+    <p id="result"></p>
+
+</body>
+<script>
+    function getResult() {
+        if (document.getElementById("usd").checked) {
+            callApi("USD")
+        }
+        if (document.getElementById("eur").checked) {
+            callApi("EUR")
+        }
+    }
+    function callApi(currency) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.exchangerate-api.com/v4/latest/' + currency)
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                updateResults(JSON.parse(xhr.responseText));
+                return JSON.parse(xhr.responseText)
+            }
+            else {
+                alert('Request failed.  Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
+
+    function updateResults(response) {
+        console.log(response);
+        let conversionVND = response.rates.VND
+        let inputNumber = document.getElementById("number").value
+        let vndAmount = inputNumber * conversionVND
+        document.getElementById("result").innerHTML = Math.floor(vndAmount) + " VND"
+
+    }
+</script>
+
+</html>
