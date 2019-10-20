@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import CompleteScreen from '../screens/CompleteScreen';
 import AllScreen from '../screens/AllScreen';
 import ActiveScreen from '../screens/ActiveScreen';
+import SingleTodoScreen from '../screens/SingleTodoScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -14,7 +15,7 @@ const config = Platform.select({
 
 const CompleteStack = createStackNavigator(
   {
-    CompleteStack: CompleteScreen,
+    Complete: CompleteScreen,
   },
   config
 );
@@ -37,7 +38,8 @@ CompleteStack.path = '';
 
 const AllStack = createStackNavigator(
   {
-    AllStack: AllScreen,
+    All: AllScreen,
+    SingleTodo: SingleTodoScreen
   },
   config
 );
@@ -53,7 +55,7 @@ AllStack.path = '';
 
 const ActiveStack = createStackNavigator(
   {
-    ActiveStack: ActiveScreen,
+    Active: ActiveScreen,
   },
   config
 );
